@@ -13,12 +13,12 @@ public class SwiftFlutterFlashlightPlugin: NSObject, FlutterPlugin {
     case "hasFlashlight":
         result(self.hasFlashlight())
         break
-    case "lightOn":
-        self.toggleFlash(on: true)
+    case "flashlightOn":
+        self.toggleFlashlight(on: true)
         result(nil)
         break
-    case "lightOff":
-        self.toggleFlash(on: false)
+    case "flashlightOff":
+        self.toggleFlashlight(on: false)
         result(nil)
         break
     default:
@@ -27,7 +27,7 @@ public class SwiftFlutterFlashlightPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  private func toggleFlash(on: Bool) {
+  private func toggleFlashlight(on: Bool) {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { return }
         

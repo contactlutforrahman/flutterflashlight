@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _hasFlashlight = false;
+  bool _checkIfHasFlashlight = false;
 
   @override
   initState() {
@@ -20,10 +20,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   initFlashlight() async {
-    bool hasFlash = await FlutterFlashlight.hasFlashlight;
-    print("Device has a flashlight ? $hasFlash");
+    bool _ifHasFlashlight = await FlutterFlashlight.hasFlashlight;
+    print("Device has a flashlight ? $_ifHasFlashlight");
     setState(() {
-      _hasFlashlight = hasFlash;
+      _checkIfHasFlashlight = _ifHasFlashlight;
     });
   }
 
@@ -37,16 +37,16 @@ class _MyAppState extends State<MyApp> {
         body: Center(
             child: Column(
               children: <Widget>[
-                Text(_hasFlashlight
+                Text(_checkIfHasFlashlight
                     ? 'Your phone has a Flashlight.'
-                    : 'Your phone has no Flashlight.'),
+                    : 'Your phone does not have a Flashlight.'),
                 ElevatedButton(
                   child: Text('Turn on'),
-                  onPressed: () => FlutterFlashlight.lightOn(),
+                  onPressed: () => FlutterFlashlight.flashlightOn(),
                 ),
                 ElevatedButton(
                   child: Text('Turn off'),
-                  onPressed: () => FlutterFlashlight.lightOff(),
+                  onPressed: () => FlutterFlashlight.flashlightOff(),
                 )
               ],
             )),

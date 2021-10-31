@@ -82,7 +82,7 @@ public class FlutterflashlightPlugin implements FlutterPlugin, MethodCallHandler
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flashlight");
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterflashlight");
         channel.setMethodCallHandler(new FlutterflashlightPlugin(registrar));
     }
 
@@ -104,10 +104,10 @@ public class FlutterflashlightPlugin implements FlutterPlugin, MethodCallHandler
     public void onMethodCall(MethodCall call, Result result) {
         if (call.method.equals("hasFlashlight")) {
             result.success(hasFlashlight);
-        } else if (call.method.equals("lightOn")) {
-            turnLight(result, true);
-        } else if (call.method.equals("lightOff")) {
-            turnLight(result, false);
+        } else if (call.method.equals("flashlightOn")) {
+            changeFlashlightStatus(result, true);
+        } else if (call.method.equals("flashlightOff")) {
+            changeFlashlightStatus(result, false);
         } else {
             result.notImplemented();
         }
@@ -116,7 +116,7 @@ public class FlutterflashlightPlugin implements FlutterPlugin, MethodCallHandler
     /**
      * set the flash light on/off
      */
-    private void turnLight(Result result, boolean on) {
+    private void changeFlashlightStatus(Result result, boolean on) {
         if (!hasFlashlight) {
             return;
         } else if (VERSION.SDK_INT >= VERSION_CODES.M) {
@@ -147,33 +147,3 @@ public class FlutterflashlightPlugin implements FlutterPlugin, MethodCallHandler
         }
     }
 }
-
-
-/** FlutterflashlightPlugin */
-// public class FlutterflashlightPlugin implements FlutterPlugin, MethodCallHandler {
-//   /// The MethodChannel that will the communication between Flutter and native Android
-//   ///
-//   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-//   /// when the Flutter Engine is detached from the Activity
-//   private MethodChannel channel;
-
-//   @Override
-//   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-//     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "flutterflashlight");
-//     channel.setMethodCallHandler(this);
-//   }
-
-//   @Override
-//   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-//     if (call.method.equals("getPlatformVersion")) {
-//       result.success("Android " + android.os.Build.VERSION.RELEASE);
-//     } else {
-//       result.notImplemented();
-//     }
-//   }
-
-//   @Override
-//   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-//     channel.setMethodCallHandler(null);
-//   }
-// }

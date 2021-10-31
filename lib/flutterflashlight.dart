@@ -9,13 +9,13 @@ class FlutterFlashlight {
     return _hasFlashlight;
   }
 
-  static Future<void> lightOn() async {
-    await _channel.invokeMethod('lightOn');
+  static Future<void> flashlightOn() async {
+    await _channel.invokeMethod('flashlightOn');
     return;
   }
 
-  static Future<void> lightOff() async {
-    await _channel.invokeMethod('lightOff');
+  static Future<void> flashlightOff() async {
+    await _channel.invokeMethod('flashlightOff');
     return;
   }
 }
